@@ -1,4 +1,4 @@
-const http = require('http');
+const http = require("http");
 const html = `
   <!DOCTYPE html>
   <html>
@@ -31,19 +31,19 @@ const html = `
     </body>
   </html>`;
 const yp = {
-  "jean": "611 233-4555",
-  "wojtek": "613 443-4321",
-  "emily": "411 998-0001",
-  "katrina": "555 987-2421"
+  jean: "611 233-4555",
+  wojtek: "613 443-4321",
+  emily: "411 998-0001",
+  katrina: "555 987-2421",
 };
 
-const f = (req, res) => {
+const requestHandler = (req, res) => {
   const tel = yp[req.url.substr(1)];
   if (tel) return res.end(tel);
   if (req.url == "/") return res.end(html);
   res.writeHeader(404).end("Not found!");
 };
 
-http.createServer(f).listen(8080, () =>
-  console.log("http://localhost:8080/")
-);
+http
+  .createServer(requestHandler)
+  .listen(8080, () => console.log("http://localhost:8080/"));
